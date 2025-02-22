@@ -1,14 +1,6 @@
 import '../tailwind.css';
-import { useStateContext } from '../context/context-provider';
-import { Navigate } from 'react-router-dom';
 
-export const Dashboard = () => {
-    const { token, setToken } = useStateContext();
-
-    if(!token) {
-        setToken(null);
-        <Navigate to="/login" />
-    }   
+export const Dashboard: React.FC = () => {
 
     return (
         <div>

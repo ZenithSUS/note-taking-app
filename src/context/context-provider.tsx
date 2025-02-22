@@ -16,7 +16,7 @@ const StateContext = createContext<ContextType>({
 
 export const ContextProvider = ({ children }: { children: React.ReactNode }) => {
     const [username, setUsername] = useState<string | null>(null);
-    const [token, _setToken] = useState<string | null>("token");
+    const [token, _setToken] = useState<string | null>(localStorage.getItem('token'));
 
     
     const setToken = (token: string | null) => {
