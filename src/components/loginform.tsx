@@ -2,8 +2,8 @@ import '../tailwind.css';
 import { Button } from "./button";
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
-import { api } from '../services/axiosClient.tsx';
 import { useStateContext } from '../context/context-provider.tsx';
+import { LoginClient } from '../services/loginClient.tsx';
 
 export const LoginForm: React.FC = () => {
     const navigate = useNavigate();
@@ -14,39 +14,26 @@ export const LoginForm: React.FC = () => {
 
     const handleSubmit = async (event: React.FormEvent) => {
         event.preventDefault();
-        const formData = new FormData();
-        formData.append('account', userAccount || '');
-        formData.append('password', password || '');
-        formData.append('process', 'login');
+        const accountInput = userAccount.trim().toLowerCase();
+        const passwordInput = password.trim();
 
         try {
-            const response = await api.post('/auth.php', formData);
-            setError(null);
-            if (response.status === 200) {
-                setToken(response.data.token);
-                localStorage.setItem('token', response.data.token);
-            }
-        } catch (err: Array<{ auth_error: string; }> | any) {
-            if (err.response) {
-                // Server responded with an error status code
-                console.error('Server Error:', err.response.data.message);
-                setError(err.response.data.error); 
-            } else if (err.request) {
-                // Request was made, but no response was received (network error)
-                console.error('Network Error:', err.request);
-                setError({ auth_error: 'A network error occurred.' }); 
-            } else {
-                // Something else happened while setting up the request
-                console.error('Request Setup Error:', err.message);
-                setError({ auth_error: 'An error occurred while setting up the request.'  });
-            }
+            await LoginClient({ account: accountInput, password: passwordInput, setToken, setError });
+        }  catch (error) {
+            console.error(error);
         }
+
     };
 
-    const handleRegister = (event: React.FormEvent) => {
+    const handleRegister = (event: React.FormEvent<HTMLButtonElement>) => {
         event.preventDefault();
         return navigate('/register');
     };
+
+    const handleInput = (event: React.FormEvent<HTMLInputElement> ) => {
+        event.preventDefault();
+        setError(null);
+    }
 
     return (
         <div className="flex flex-col gap-4">
@@ -54,11 +41,11 @@ export const LoginForm: React.FC = () => {
                 <h1 className="text-2xl sm:text-3xl font-bold text-center mb-2">Login</h1>
                 <div className="flex flex-col gap-2">
                     <label htmlFor="UsernameOrEmail">Username or Email</label>
-                    <input type="text" id="UsernameOrEmail" className="p-2 rounded-2xl bg-white text-black" value={userAccount} onChange={((e) => setUserAccount(e.target.value))} />
+                    <input type="text" id="UsernameOrEmail" className="p-2 rounded-2xl bg-white text-black" value={userAccount} onChange={((e) => setUserAccount(e.target.value))} onInput={handleInput} />
                 </div>
                 <div className="flex flex-col gap-2">
                     <label htmlFor="password">Password</label>
-                    <input type="password" id="password" className="p-2 rounded-2xl bg-white text-black" value={password} onChange={((e) => setPassword(e.target.value))} />
+                    <input type="password" id="password" className="p-2 rounded-2xl bg-white text-black" value={password} onChange={((e) => setPassword(e.target.value))} onInput={handleInput} />
                 </div>
                 <div className="flex flex-col gap-2 justify-center items-center w-full">
                     <Button text="Login" onClick={handleSubmit} />
