@@ -4,14 +4,27 @@ import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { RegisterClient } from '../services/client/registerClient';
 
+type ErrorHandlingProps = {
+    username?: string | null,
+    email?: string | null,
+    password?: string | null,
+    confirmpassword?: string | null,
+    usernameValid?: Object | null,
+    passwordValid?: Object | null
+}
+
+type NetworkErrorProps = {
+    message: string
+}
+
 export const RegisterForm: React.FC = () => {
     const navigate = useNavigate();
     const [username, setUsername] = useState<string>('');
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
     const [confirmPassword, setConfirmPassword] = useState<string>('');
-    const [errors, setErrors] = useState<{ username?: string; email?: string; password?: string; confirmpassword?: string; usernameValid?: Object; passwordValid?: Object } | null>({});
-    const [networkError, setNetworkError] = useState<{ message: string } | null>(null);
+    const [errors, setErrors] = useState<ErrorHandlingProps | null>(null);
+    const [networkError, setNetworkError] = useState<NetworkErrorProps | null>(null);
 
     const handleSubmit = async (event: React.FormEvent) => { 
         event.preventDefault();
@@ -32,7 +45,16 @@ export const RegisterForm: React.FC = () => {
 
     const handleInput = (event: React.FormEvent<HTMLInputElement>) => {
         event.preventDefault();
-        setErrors({ ...errors, [event.currentTarget.id]: ''});
+        if(!errors) return;
+
+        if(event.currentTarget.id === 'username') {
+            setErrors({ ...errors, [event.currentTarget.id]: '', usernameValid: {} });
+        } else if(event.currentTarget.id === 'password') {
+            setErrors({ ...errors, [event.currentTarget.id]: '', passwordValid: {} });
+        } else {
+            setErrors({ ...errors, [event.currentTarget.id]: '' });
+        }
+        
         setNetworkError(null);
     }
 
@@ -47,7 +69,7 @@ export const RegisterForm: React.FC = () => {
                 <h1 className="text-3xl font-bold text-center mb-2">Register</h1>
                 <div className="flex flex-col gap-2">
                     <label htmlFor="username">Username</label>
-                    <input type="text" id="username" className="py-2 rounded-2xl bg-white" value={username} onChange={(event) => setUsername(event.target.value)} onInput={() => {handleInput; setErrors({ ...errors, usernameValid: {} })}} />
+                    <input type="text" id="username" className="py-2 rounded-2xl bg-white" value={username} onChange={(event) => setUsername(event.target.value)} onInput={handleInput} />
                     {errors?.username && <p className="text-red-500 block">{errors.username}</p> ||
                         errors?.usernameValid && Object.values(errors.usernameValid).map(
                             (error: string, index: number) => (
@@ -61,7 +83,7 @@ export const RegisterForm: React.FC = () => {
                 </div>
                 <div className="flex flex-col gap-2">
                     <label htmlFor="password">Password</label>
-                    <input type="password" id="password" className="py-2 rounded-2xl bg-white" value={password} onChange={(event) => setPassword(event.target.value)} onInput={() => {handleInput; setErrors({ ...errors, passwordValid: {} })}} />
+                    <input type="password" id="password" className="py-2 rounded-2xl bg-white" value={password} onChange={(event) => setPassword(event.target.value)} onInput={handleInput} />
                     {errors?.password && <p className="text-red-500">{errors.password}</p> ||
                         errors?.passwordValid && Object.values(errors.passwordValid).map(
                             (error: string, index: number) => (

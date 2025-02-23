@@ -1,11 +1,11 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { UserLayout } from "./layouts/user-layout";
 import { AuthLayout } from "./layouts/auth-layout";
-import { Login } from "./navigation/login";
-import { Register } from "./navigation/register";
-import { Dashboard } from "./navigation/dashboard";
-import { Notes } from "./navigation/notes";
-import { Settings } from "./navigation/settings";
+import { Login } from "./pages/login";
+import { Register } from "./pages/register";
+import { Dashboard } from "./pages/dashboard";
+import { Notes } from "./pages/notes";
+import { Settings } from "./pages/settings";
 import './tailwind.css'
 
 function App() {

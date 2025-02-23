@@ -9,11 +9,12 @@ type RegisterClientProps = {
     setNetworkError: (error: { message: string } | null) => void
 }
 
-
-
 export const RegisterClient: (props: RegisterClientProps) => Promise<void> = async ({ username, email, password, confirmpassword, setErrors, setNetworkError }: RegisterClientProps) => {
-    const navigate = useNavigate();
-    const success = () => navigate('/login');
+   
+    const success = () => {
+        const navigate = useNavigate(); 
+        navigate('/login');
+    }
 
     const formData = new FormData();
     formData.append('username', username || '');

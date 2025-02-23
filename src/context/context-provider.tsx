@@ -9,6 +9,10 @@ type ContextType = {
     setLoading: (loading: boolean) => void
 }
 
+type Props = { 
+    children: React.ReactNode 
+}
+
 const StateContext = createContext<ContextType>({
     username: null,
     token: null,
@@ -18,7 +22,7 @@ const StateContext = createContext<ContextType>({
     setLoading: () => {},
 });
 
-export const ContextProvider = ({ children }: { children: React.ReactNode }) => {
+export const ContextProvider = ({ children }: Props) => {
     const [username, setUsername] = useState<string | null>(null);
     const [token, _setToken] = useState<string | null>(localStorage.getItem('token'));
     const [loading, setLoading] = useState<boolean>(false);

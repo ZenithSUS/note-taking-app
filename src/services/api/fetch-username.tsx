@@ -7,6 +7,7 @@ type FetchUsernameProps = {
 export const FetchUsername = async ({ setUsername }: FetchUsernameProps) => {
     const formData = new FormData();
     formData.append('process', 'get-username');
+    
     try {
         const response = await api.post("/users.php", formData);
         console.log(response);

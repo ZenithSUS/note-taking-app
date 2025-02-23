@@ -20,7 +20,7 @@ export function Header ({username, loading}: HeaderProps) {
     }
 
     return (
-        <header className="flex items-center justify-between p-4 absolute top-0 bg-gray-900 text-white w-full pl-68">
+        <header className="flex items-center justify-between p-4 absolute top-0 bg-gray-900 text-white w-full sm:pl-68">
             <h2>{loading || !username ? 'Loading...' : 'Welcome, ' + username}</h2>
             <Button text="Logout" onClick={handleLogout} />
         </header>

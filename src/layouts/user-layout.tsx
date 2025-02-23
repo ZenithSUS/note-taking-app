@@ -24,7 +24,7 @@ export const UserLayout: React.FC<Props> = ({ children } : Props) => {
         <>
             <Sidebar />
                 <Header username={username} loading={loading} />
-                <div className="ml-64">
+                <div className="sm:ml-64">
                     <MainWrapper>{children}</MainWrapper>
                 </div>
         </>
