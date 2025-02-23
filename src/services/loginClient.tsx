@@ -9,9 +9,10 @@ type loginClientProps = {
 
 export const LoginClient: (props: loginClientProps) => Promise<void> = async ({ account, password, setToken, setError }: loginClientProps) =>  {
     const formData = new FormData();
-        formData.append('account', account || '');
-        formData.append('password', password || '');
-        formData.append('process', 'login');
+    formData.append('account', account || '');
+    formData.append('password', password || '');
+    formData.append('process', 'login');
+    
     try {
         const response = await api.post('/auth.php', formData);
         setError(null);

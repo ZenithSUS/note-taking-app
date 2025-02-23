@@ -3,21 +3,25 @@ import { createContext, useContext, useState } from "react";
 type ContextType = {
     username: string | null,
     token: string | null,
+    loading: boolean,
     setToken: (token: string | null) => void,
     setUsername: (username: string | null) => void,
+    setLoading: (loading: boolean) => void
 }
 
 const StateContext = createContext<ContextType>({
     username: null,
     token: null,
+    loading: false,
     setToken: () => {},
     setUsername: () => {},
+    setLoading: () => {},
 });
 
 export const ContextProvider = ({ children }: { children: React.ReactNode }) => {
     const [username, setUsername] = useState<string | null>(null);
     const [token, _setToken] = useState<string | null>(localStorage.getItem('token'));
-
+    const [loading, setLoading] = useState<boolean>(false);
     
     const setToken = (token: string | null) => {
         _setToken(token);
@@ -34,6 +38,8 @@ export const ContextProvider = ({ children }: { children: React.ReactNode }) => 
             setUsername, 
             token, 
             setToken,
+            loading,
+            setLoading
             }}>
             {children}
         </StateContext.Provider>

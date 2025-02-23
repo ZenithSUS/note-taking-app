@@ -1,5 +1,5 @@
 import axios from "axios";
-const apiUrl = "http://localhost/noteTakingAPI/request";
+const apiUrl = import.meta.env.VITE_API_URL;
 
 export const api = axios.create({
     baseURL: apiUrl,
