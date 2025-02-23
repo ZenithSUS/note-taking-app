@@ -13,7 +13,7 @@ export const LogoutClient: (props: LogoutClientProps) => Promise<void> = async (
     try {
         const response = await api.post('/auth.php', formData);
         if(response && response.status === 200) {
-            setToken(null);
+            return setToken(null);
         }
     } catch (err: any) {
         if(err.response) {

@@ -13,7 +13,8 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<UserLayout children={<Dashboard />}/>} />
+        <Route path="/" element={<AuthLayout children={<Login />} />} />
+        <Route path="/dashboard" element={<UserLayout children={<Dashboard />}/>} />
         <Route path="/login" element={<AuthLayout children={<Login />} />} />
         <Route path="/register" element={<AuthLayout children={<Register />} />} />
         <Route path="/notes" element={<UserLayout children={<Notes />} />} />

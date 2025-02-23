@@ -9,7 +9,7 @@ export const Sidebar: React.FC = () => {
             </div>
             <ul className="space-y-2 text-1xl">
                 <li>
-                    <Link to ="/" className="block py-2 p-2 hover:bg-gray-700">Dashboard</Link>
+                    <Link to ="/dashboard" className="block py-2 p-2 hover:bg-gray-700">Dashboard</Link>
                 </li>
                 <li>
                     <Link to="/notes" className="block py-2 p-2 hover:bg-gray-700">Notes</Link>

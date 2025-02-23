@@ -1,14 +1,16 @@
 import '../tailwind.css';
 import { Button } from './button';
 import { useStateContext } from '../context/context-provider';
-import { LogoutClient } from '../services/logoutClient';
+import { LogoutClient } from '../services/client/logoutClient';
+
 
 type HeaderProps = {
     username: string | null,
     imageUrl?: string,
+    loading?: boolean
 }
 
-export function Header ({username}: HeaderProps) {
+export function Header ({username, loading}: HeaderProps) {
     const { token, setToken } = useStateContext();
 
     const handleLogout = async () => {
@@ -19,7 +21,7 @@ export function Header ({username}: HeaderProps) {
 
     return (
         <header className="flex items-center justify-between p-4 absolute top-0 bg-gray-900 text-white w-full pl-68">
-            <h2>Welcome, {username || 'Anonymous'}</h2>
+            <h2>{loading || !username ? 'Loading...' : 'Welcome, ' + username}</h2>
             <Button text="Logout" onClick={handleLogout} />
         </header>
     )

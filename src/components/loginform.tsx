@@ -3,7 +3,7 @@ import { Button } from "./button";
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { useStateContext } from '../context/context-provider.tsx';
-import { LoginClient } from '../services/loginClient.tsx';
+import { LoginClient } from '../services/client/loginClient';
 
 export const LoginForm: React.FC = () => {
     const navigate = useNavigate();

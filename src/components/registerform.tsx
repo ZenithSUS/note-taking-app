@@ -2,7 +2,7 @@ import '../tailwind.css';
 import { Button } from "./button";
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
-import { RegisterClient } from '../services/registerClient';
+import { RegisterClient } from '../services/client/registerClient';
 
 export const RegisterForm: React.FC = () => {
     const navigate = useNavigate();

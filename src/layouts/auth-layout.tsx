@@ -10,7 +10,7 @@ type AuthProp = {
 export const AuthLayout: React.FC<AuthProp> = ({ children } : AuthProp) => {
     const { token } = useStateContext();
 
-    if(token) return <Navigate to="/" />
+    if(token) return <Navigate to="/dashboard" />
     
     return (
         <FormWrapper>
