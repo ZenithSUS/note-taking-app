@@ -16,4 +16,5 @@ export type NotesType = {
   id: number;
   title: string;
   content: string;
+  status: number;
 };

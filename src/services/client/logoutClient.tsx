@@ -1,4 +1,5 @@
 import { api } from "./axiosClient";
+import { ErrorType } from "../../lib/types";
 
 type LogoutClientProps = {
   token?: string;
@@ -17,16 +18,17 @@ export const LogoutClient: (
     if (response && response.status === 200) {
       return setToken("");
     }
-  } catch (err: any) {
-    if (err.response) {
+  } catch (err: unknown) {
+    const error = err as ErrorType;
+    if (error.response) {
       // Server responded with an error status code
-      console.error("Server Error:", err.response.data.message);
-    } else if (err.request) {
+      console.error("Server Error:", error.response.data.message);
+    } else if (error.request) {
       // Request was made, but no response was received (network error)
-      console.error("Network Error:", err.request);
+      console.error("Network Error:", error.request);
     } else {
       // Something else happened while setting up the request
-      console.error("Request Setup Error:", err.message);
+      console.error("Request Setup Error:", error.message);
     }
   }
 };
