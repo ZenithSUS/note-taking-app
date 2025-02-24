@@ -1,11 +1,11 @@
 import { createContext, useContext, useState } from "react";
 
 type ContextType = {
-    username: string | null,
-    token: string | null,
+    username?: string,
+    token?: string,
     loading: boolean,
-    setToken: (token: string | null) => void,
-    setUsername: (username: string | null) => void,
+    setToken: (token: string) => void,
+    setUsername: (username: string) => void,
     setLoading: (loading: boolean) => void
 }
 
@@ -14,8 +14,8 @@ type Props = {
 }
 
 const StateContext = createContext<ContextType>({
-    username: null,
-    token: null,
+    username: '',
+    token: '',
     loading: false,
     setToken: () => {},
     setUsername: () => {},
@@ -23,11 +23,11 @@ const StateContext = createContext<ContextType>({
 });
 
 export const ContextProvider = ({ children }: Props) => {
-    const [username, setUsername] = useState<string | null>(null);
-    const [token, _setToken] = useState<string | null>(localStorage.getItem('token'));
+    const [username, setUsername] = useState<string>('');
+    const [token, _setToken] = useState<string>(localStorage.getItem('token')!);
     const [loading, setLoading] = useState<boolean>(false);
     
-    const setToken = (token: string | null) => {
+    const setToken = (token: string) => {
         _setToken(token);
         if(token) {
             localStorage.setItem('token', token);

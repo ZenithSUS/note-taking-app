@@ -1,12 +1,12 @@
 import { api } from "./axiosClient";
 import { useNavigate } from "react-router-dom";
 type RegisterClientProps = {
-    username: string | null,
-    email: string | null,
-    password: string | null,
-    confirmpassword: string | null,
-    setErrors: (errors: Object | null) => void,
-    setNetworkError: (error: { message: string } | null) => void
+    username: string,
+    email: string,
+    password: string,
+    confirmpassword: string,
+    setErrors: (errors: Object) => void,
+    setNetworkError: (error: { message: string }) => void
 }
 
 export const RegisterClient: (props: RegisterClientProps) => Promise<void> = async ({ username, email, password, confirmpassword, setErrors, setNetworkError }: RegisterClientProps) => {

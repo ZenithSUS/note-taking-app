@@ -5,7 +5,7 @@ import { LogoutClient } from '../services/client/logoutClient';
 
 
 type HeaderProps = {
-    username: string | null,
+    username?: string,
     imageUrl?: string,
     loading?: boolean
 }

@@ -6,7 +6,7 @@ import { useStateContext } from '../context/context-provider';
 
 export const Dashboard: React.FC = () => {
     const { loading, setLoading } = useStateContext();
-    const [notes, setNotes] = useState<Object[] | null>(null);
+    const [notes, setNotes] = useState<Object[]>([]);
 
     useEffect(() => {
         setLoading(true);

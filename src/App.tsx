@@ -6,22 +6,34 @@ import { Register } from "./pages/register";
 import { Dashboard } from "./pages/dashboard";
 import { Notes } from "./pages/notes";
 import { Settings } from "./pages/settings";
-import './tailwind.css'
+import "./tailwind.css";
 
 function App() {
-
   return (
     <Router>
       <Routes>
         <Route path="/" element={<AuthLayout children={<Login />} />} />
-        <Route path="/dashboard" element={<UserLayout children={<Dashboard />}/>} />
+        <Route
+          path="/dashboard"
+          element={<UserLayout children={<Dashboard />} />}
+        />
         <Route path="/login" element={<AuthLayout children={<Login />} />} />
-        <Route path="/register" element={<AuthLayout children={<Register />} />} />
+        <Route
+          path="/register"
+          element={<AuthLayout children={<Register />} />}
+        />
         <Route path="/notes" element={<UserLayout children={<Notes />} />} />
-        <Route path="/settings" element={<UserLayout children={<Settings />} />} />
+        <Route
+          path="/notes/:id"
+          element={<UserLayout children={<Notes />} />}
+        />
+        <Route
+          path="/settings"
+          element={<UserLayout children={<Settings />} />}
+        />
       </Routes>
     </Router>
-  )
+  );
 }
 
 export default App;

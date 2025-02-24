@@ -5,12 +5,12 @@ import { useState } from 'react';
 import { RegisterClient } from '../services/client/registerClient';
 
 type ErrorHandlingProps = {
-    username?: string | null,
-    email?: string | null,
-    password?: string | null,
-    confirmpassword?: string | null,
-    usernameValid?: Object | null,
-    passwordValid?: Object | null
+    username?: string,
+    email?: string,
+    password?: string,
+    confirmpassword?: string,
+    usernameValid?: Object,
+    passwordValid?: Object,
 }
 
 type NetworkErrorProps = {

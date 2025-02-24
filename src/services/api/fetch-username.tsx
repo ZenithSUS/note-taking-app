@@ -1,7 +1,7 @@
 import { api } from "../client/axiosClient";
 
 type FetchUsernameProps = {
-    setUsername: (username: string | null) => void;   
+    setUsername: (username: string) => void;   
 }
 
 export const FetchUsername = async ({ setUsername }: FetchUsernameProps) => {
